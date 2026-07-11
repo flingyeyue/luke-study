@@ -78,9 +78,20 @@
 - 问题与修正：原知识库契约只有概念级字段，扩展为版本化规范；公共边界中的日期改用 ISO 字符串，不跨 Worker 传递 JavaScript `Date`。
 - 证据：两份契约、同步脚本、工作区规则和本次提交。
 
+### 2026-07-11：完成 M0 工程基线
+
+- 目标：完成 T0-01 至 T0-04，为多终端并行开发建立可重复的工程和契约基线。
+- AI 贡献：初始化 pnpm workspace、React/Vite Web 壳、严格 TypeScript、ESLint、Prettier、Vitest 和 CI；实现 14 类节点配置、项目、数据、诊断与 Worker 的 Zod Schema；实现 Worker 最小处理器、虚构夹具和项目文档。
+- 提示/任务摘要：按照任务计划持续执行，遇到需要新终端时再通知用户。
+- 产出：`apps/web`、`packages/contracts`、`packages/test-fixtures`、根工具链、CI 和 README。
+- 人工决策：没有采用 npm `latest` 的 TypeScript 7.0.2，因为 `typescript-eslint` peer range 小于 6.1；锁定 TypeScript 5.9.3。M0 Worker 只完成协议，不把未实现的节点执行描述为完成。
+- 验证：`pnpm install --frozen-lockfile`、lint、typecheck、format check、build 和契约同步均通过；contracts 9 项测试和 web 6 项测试通过；Vite 开发服务器在 `http://localhost:5173/` 启动并通过 HTTP 页面和模块请求；敏感凭据模式扫描无匹配。
+- 问题与修正：初次验证发现 ESLint 类型配置误作用于 JS 配置、Vite 的 test 配置类型来源错误、Vitest API 未显式导入、两个仓库使用不同 Prettier 配置导致契约漂移；分别通过限定 ESLint files、从 `vitest/config` 导入、显式导入测试 API、统一契约格式并将契约排除出普通格式化修正。收尾时曾根据短哈希写入未经验证的完整提交值，在知识库提交前通过 `git rev-parse HEAD` 发现并替换为真实值。
+- 证据：项目提交 `5ea7e5157807e153a52ec8be26fc4e067e5f0cd7`、测试输出、构建产物统计和本次知识库提交。
+
 ## 结果汇总
 
-- 主要 AI 贡献：初版产品范围、架构、契约、并行计划和测试策略。
+- 主要 AI 贡献：初版产品范围、架构、契约、并行计划、M0 工程基线和测试策略。
 - 主要人工修正与决策：待项目负责人审阅后补充。
-- 已测量结果：暂无；项目尚未开始编码。
+- 已测量结果：M0 共 15 项自动化测试通过；生产构建成功；尚未进行数据处理性能测试。
 - 限制和未解决风险：目标浏览器、标准性能设备和底层转换库尚未最终确认。
