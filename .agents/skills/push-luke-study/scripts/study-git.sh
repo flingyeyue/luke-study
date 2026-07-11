@@ -4,6 +4,7 @@ set -euo pipefail
 readonly ALLOWED_ROOT="/home/lucas/code/luke"
 readonly REPO="/home/lucas/code/luke/study"
 readonly REMOTE="git@github.com:flingyeyue/luke-study.git"
+readonly WEB_REMOTE="https://github.com/flingyeyue/luke-study"
 readonly KEY="/home/lucas/.ssh/luke-study-deploy"
 readonly SSH_COMMAND="ssh -i ${KEY} -o IdentitiesOnly=yes -o BatchMode=yes"
 
@@ -57,6 +58,28 @@ commit_changes() {
   fi
 }
 
+report_remote_folders() {
+  local commit="$1" path folder
+  local -A folders=()
+
+  while IFS= read -r -d '' path; do
+    if [[ "$path" == */* ]]; then
+      folder="${path%/*}/"
+    else
+      folder="/"
+    fi
+    folders["$folder"]=1
+  done < <(git -C "$REPO" diff-tree --no-commit-id --name-only -r -z "$commit")
+
+  printf 'remote repository: %s\n' "$WEB_REMOTE"
+  printf 'remote branch: main\n'
+  printf 'commit: %s\n' "$commit"
+  printf 'remote folders:\n'
+  printf '%s\n' "${!folders[@]}" | LC_ALL=C sort | while IFS= read -r folder; do
+    printf -- '- %s\n' "$folder"
+  done
+}
+
 push_main() {
   local branch local_head remote_head
   enforce_scope
@@ -69,6 +92,7 @@ push_main() {
   remote_head="$(GIT_SSH_COMMAND="$SSH_COMMAND" git -C "$REPO" ls-remote origin refs/heads/main | awk '{print $1}')"
   [[ "$local_head" == "$remote_head" ]] || fail "remote verification failed"
   printf 'verified: %s\n' "$local_head"
+  report_remote_folders "$local_head"
 }
 
 case "${1:-}" in

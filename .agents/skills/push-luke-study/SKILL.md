@@ -29,7 +29,9 @@ Do not amend, force-push, reset, or rewrite history unless the user explicitly r
 ## Push and Verify
 
 1. Run `scripts/study-git.sh push` after a successful commit.
-2. Report the full commit hash and whether local `main` matches remote `main`.
-3. If authentication or authorization fails, preserve the local commit and report the exact blocker. Never fall back to another user's SSH identity or request secrets in chat.
+2. Report the remote repository, branch, full commit hash, and whether local `main` matches remote `main`.
+3. Report every remote folder changed by the commit, using repository-relative folder paths exactly as printed by the script. Use `/` when a changed file is at the repository root.
+4. Include the remote folder list in every user-facing completion message after a successful knowledge-base commit, even when the user did not ask for it again.
+5. If authentication or authorization fails, preserve the local commit and report the exact blocker. Never fall back to another user's SSH identity or request secrets in chat.
 
 After changing this skill itself, validate it with the system `quick_validate.py`, commit the knowledge-base update, and push it with this workflow.
