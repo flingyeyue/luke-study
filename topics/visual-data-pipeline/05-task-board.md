@@ -13,17 +13,19 @@
 ## 当前执行状态
 
 - M0 基线：`DONE`
+- Wave 1 并行骨架：`DONE`
 - 项目基线提交：`5ea7e5157807e153a52ec8be26fc4e067e5f0cd7`
-- 当前 Wave：Wave 1 并行骨架
-- 首批可领取任务：T1-01、T2-01、T3-01、T4-01、T5-01
+- Wave 1 集成提交：`603a0ab906c5b1742bb697ef06d64c2089f61dda`
+- 当前 Wave：Wave 2 核心节点与 M1 垂直链路
+- 下一批可领取任务：T2-03、T3-03、T4-03、T4-04、T1-03、T5-03
 
-| 终端 | Worktree                               | 分支                    | 首批任务 | 状态  |
-| ---- | -------------------------------------- | ----------------------- | -------- | ----- |
-| 1    | `/home/lucas/code/luke/project-canvas` | `feature/canvas`        | T1-01    | READY |
-| 2    | `/home/lucas/code/luke/project-engine` | `feature/engine`        | T2-01    | READY |
-| 3    | `/home/lucas/code/luke/project-files`  | `feature/file-adapters` | T3-01    | READY |
-| 4    | `/home/lucas/code/luke/project-nodes`  | `feature/node-config`   | T4-01    | READY |
-| 5    | `/home/lucas/code/luke/project-qa`     | `feature/qa-delivery`   | T5-01    | READY |
+| 终端 | Worktree                               | 分支                    | 首批任务 | 状态 |
+| ---- | -------------------------------------- | ----------------------- | -------- | ---- |
+| 1    | `/home/lucas/code/luke/project-canvas` | `feature/canvas`        | T1-01/02 | DONE |
+| 2    | `/home/lucas/code/luke/project-engine` | `feature/engine`        | T2-01/02 | DONE |
+| 3    | `/home/lucas/code/luke/project-files`  | `feature/file-adapters` | T3-01/02 | DONE |
+| 4    | `/home/lucas/code/luke/project-nodes`  | `feature/node-config`   | T4-01/02 | DONE |
+| 5    | `/home/lucas/code/luke/project-qa`     | `feature/qa-delivery`   | T5-01/02 | DONE |
 
 ## 终端所有权
 
@@ -116,16 +118,18 @@
 
 | ID    | 终端 | 依赖  | 任务                         | 验收条件                                 |
 | ----- | ---: | ----- | ---------------------------- | ---------------------------------------- |
-| T1-01 |    1 | T0-02 | 工作区布局和 React Flow 画布 | 节点可拖入、连接、选择和删除             |
-| T1-02 |    1 | T1-01 | 画布命令与键盘操作           | 撤销重做、缩放、适配视图有测试           |
-| T2-01 |    2 | T0-02 | 图校验和拓扑排序             | 环、断边、不可达和端口错误有测试         |
-| T2-02 |    2 | T0-03 | 引擎调度器                   | 顺序执行、失败停止和取消有测试           |
-| T3-01 |    3 | T0-02 | CSV 导入适配器               | 编码、空文件、缺失字段和大文件夹具有测试 |
-| T3-02 |    3 | T3-01 | JSON 导入适配器              | 对象数组和支持的嵌套策略有测试           |
-| T4-01 |    4 | T0-02 | 节点配置框架                 | Schema 错误可以定位到字段和节点          |
-| T4-02 |    4 | T0-03 | 预览与运行状态框架           | 分页预览、日志、错误和统计可切换         |
-| T5-01 |    5 | T0-01 | Playwright 与固定测试夹具    | CI 可执行一个导入 CSV 冒烟测试           |
-| T5-02 |    5 | T0-01 | 构建和浏览器兼容检查         | 生产构建通过，记录目标浏览器             |
+| T1-01 |    1 | T0-02 | 工作区布局和 React Flow 画布 | `DONE`，节点可拖入、连接、选择和删除     |
+| T1-02 |    1 | T1-01 | 画布命令与键盘操作           | `DONE`，撤销重做、缩放、适配视图有测试   |
+| T2-01 |    2 | T0-02 | 图校验和拓扑排序             | `DONE`，环、断边、不可达和端口错误有测试 |
+| T2-02 |    2 | T0-03 | 引擎调度器                   | `DONE`，顺序执行、失败停止和取消有测试   |
+| T3-01 |    3 | T0-02 | CSV 导入适配器               | `DONE`，解析、推断和错误诊断有测试       |
+| T3-02 |    3 | T3-01 | JSON 导入适配器              | `DONE`，对象数组和嵌套策略有测试         |
+| T4-01 |    4 | T0-02 | 节点配置框架                 | `DONE`，Schema 错误可定位到字段和节点    |
+| T4-02 |    4 | T0-03 | 预览与运行状态框架           | `DONE`，分页预览、日志、错误和统计可切换 |
+| T5-01 |    5 | T0-01 | Playwright 与固定测试夹具    | `DONE`，CI 可执行 CSV 文件读取冒烟测试   |
+| T5-02 |    5 | T0-01 | 构建和浏览器兼容检查         | `DONE`，生产构建和 Chromium E2E 通过     |
+
+Wave 1 分支提交：画布 `cf21e21`、引擎 `d6c748a`、文件适配器 `fb503b3`、节点面板 `91698a3`、QA `7ce9ad0`。上述提交均已按依赖顺序合并到 `main`。T5-01 当前只验证浏览器可上传并读取固定 CSV 文件，不代表产品 CSV 输入节点已经接通；真实导入到预览的验收归入 M1 和 T5-03。
 
 ## Wave 2：核心节点
 
