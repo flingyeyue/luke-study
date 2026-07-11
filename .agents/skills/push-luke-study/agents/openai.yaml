@@ -1,0 +1,4 @@
+interface:
+  display_name: "发布 Luke 知识库"
+  short_description: "Safely commit and push the scoped Luke study knowledge base"
+  default_prompt: "Use $push-luke-study to verify, commit, and push the Luke study knowledge base."

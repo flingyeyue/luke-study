@@ -34,6 +34,17 @@
 - 问题与修正：无。
 - 证据：本文件及项目知识库 `README.md`。
 
+### 2026-07-11：建立受限的知识库 Git Skill
+
+- 目标：复用知识库的 Deploy Key 提交与推送流程，并限制使用目录和目标仓库。
+- AI 贡献：查询 Codex 官方项目级 Skill 发现规则，设计 `push-luke-study` 的作用域校验、变更审查、提交和远程校验流程。
+- 提示/任务摘要：把当前 Git 操作做成 Skill，并确保只有在 `/home/lucas/code/luke` 及其下级目录启动的 Codex 可以使用。
+- 产出：`study/.agents/skills/push-luke-study` 及当前根目录、现有嵌套仓库的发现链接。
+- 人工决策：用户指定目录作用域，并已授权 `luke-study` Deploy Key 写权限。
+- 验证：系统 `quick_validate.py` 校验通过；`bash -n` 语法检查通过；从 `project/` 执行检查成功；从 `/tmp` 执行被作用域校验拒绝；根目录和 `project/` 的符号链接均解析到知识库中的唯一 Skill；敏感凭据模式扫描无匹配。提交和远程推送结果在交付信息中报告。
+- 问题与修正：官方手册 helper 因响应缺少校验头失败，改用 OpenAI 官方文档确认 `.agents/skills` 的仓库扫描规则。
+- 证据：Skill 文件、脚本测试结果、本次提交，以及 OpenAI 官方 `https://learn.chatgpt.com/docs/build-skills` 的项目级 Skill 位置说明。
+
 ## 结果汇总
 
 - 主要 AI 贡献：初版产品范围、架构、契约、并行计划和测试策略。
