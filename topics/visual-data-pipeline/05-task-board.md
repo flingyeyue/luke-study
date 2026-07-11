@@ -10,6 +10,21 @@
 
 任务状态只有在真实进展发生后更新。负责人填写终端编号或分支名。
 
+## 当前执行状态
+
+- M0 基线：`DONE`
+- 项目基线提交：`5ea7e5157807e153a52ec8be26fc4e067e5f0cd7`
+- 当前 Wave：Wave 1 并行骨架
+- 首批可领取任务：T1-01、T2-01、T3-01、T4-01、T5-01
+
+| 终端 | Worktree                               | 分支                    | 首批任务 | 状态  |
+| ---- | -------------------------------------- | ----------------------- | -------- | ----- |
+| 1    | `/home/lucas/code/luke/project-canvas` | `feature/canvas`        | T1-01    | READY |
+| 2    | `/home/lucas/code/luke/project-engine` | `feature/engine`        | T2-01    | READY |
+| 3    | `/home/lucas/code/luke/project-files`  | `feature/file-adapters` | T3-01    | READY |
+| 4    | `/home/lucas/code/luke/project-nodes`  | `feature/node-config`   | T4-01    | READY |
+| 5    | `/home/lucas/code/luke/project-qa`     | `feature/qa-delivery`   | T5-01    | READY |
+
 ## 终端所有权
 
 | 终端      | 分支                    | 主要所有权                            | 禁止直接修改                 |

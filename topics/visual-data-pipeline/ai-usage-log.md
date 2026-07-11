@@ -89,6 +89,17 @@
 - 问题与修正：初次验证发现 ESLint 类型配置误作用于 JS 配置、Vite 的 test 配置类型来源错误、Vitest API 未显式导入、两个仓库使用不同 Prettier 配置导致契约漂移；分别通过限定 ESLint files、从 `vitest/config` 导入、显式导入测试 API、统一契约格式并将契约排除出普通格式化修正。收尾时曾根据短哈希写入未经验证的完整提交值，在知识库提交前通过 `git rev-parse HEAD` 发现并替换为真实值。
 - 证据：项目提交 `5ea7e5157807e153a52ec8be26fc4e067e5f0cd7`、测试输出、构建产物统计和本次知识库提交。
 
+### 2026-07-11：准备 Wave 1 并行工作区
+
+- 目标：让五个功能终端从同一 M0 基线开始并行开发，避免共享目录写冲突。
+- AI 贡献：创建 canvas、engine、file-adapters、node-config 和 qa-delivery 五个分支及 Git worktree；安装冻结依赖；建立项目级 Skill 发现链接。
+- 提示/任务摘要：持续执行计划，在需要新开终端时通知用户。
+- 产出：五个可直接打开的干净 worktree，均位于 `/home/lucas/code/luke` 下。
+- 人工决策：用户授权持续执行，并要求在需要新终端时通知。
+- 验证：五个 worktree 均位于项目提交 `5ea7e5157807e153a52ec8be26fc4e067e5f0cd7`，`pnpm install --frozen-lockfile` 成功，分支与任务所有权一致，Git 工作区干净，Skill 链接解析到知识库中的唯一版本。
+- 问题与修正：首次批量状态检查的 JavaScript 工具编排字符串存在语法错误，未执行任何仓库操作；修正字符串后检查通过。
+- 证据：`git worktree list`、各 worktree 的 Git 状态、依赖安装输出和任务看板。
+
 ## 结果汇总
 
 - 主要 AI 贡献：初版产品范围、架构、契约、并行计划、M0 工程基线和测试策略。
