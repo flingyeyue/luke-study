@@ -1,0 +1,4 @@
+interface:
+  display_name: "工作进度报告"
+  short_description: "在项目任务开始和结束时报告真实进度、验证结果、阻塞与后续工作"
+  default_prompt: "Use $report-work-progress to report current progress before and after completing this task."
