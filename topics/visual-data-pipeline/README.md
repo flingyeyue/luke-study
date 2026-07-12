@@ -21,8 +21,9 @@
 4. [开发计划](04-development-plan.md)
 5. [任务看板](05-task-board.md)
 6. [测试与验收](06-testing-and-acceptance.md)
-7. [架构决策](decisions.md)
-8. [AI 使用记录](ai-usage-log.md)
+7. [使用与功能指南](07-user-guide.md)
+8. [架构决策](decisions.md)
+9. [AI 使用记录](ai-usage-log.md)
 
 ## 维护规则
 
