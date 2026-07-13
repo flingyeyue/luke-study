@@ -314,6 +314,17 @@
 - 验证：步骤和预期结果对照当前公网生产服务、CDP 网络检查、E2E、性能记录及 `07-user-guide.md`；共享契约未修改。
 - 证据：知识库根 `README.md`、专题导航、独立 Git 分支和 PR。
 
+### 2026-07-13：修复 HTTP 隧道下 CSV 导入失败
+
+- 目标：修复公网 HTTP 演示环境选择 CSV 时出现 `crypto.randomUUID is not a function` 并中断导入的问题。
+- AI 贡献：定位 4 处直接 UUID 调用；实现统一 ID 生成器，优先使用 `crypto.randomUUID`，缺失时使用 `crypto.getRandomValues` 生成 UUID v4，并保留旧浏览器兜底；替换 CSV 绑定、运行、预览和画布新增节点路径；增加单元和浏览器回归测试。
+- 提示/任务摘要：用户报告通过隧道导入 CSV 时出现未捕获 TypeError。
+- 产出：项目提交 `f3581bb145fe3d910e9ae60a1027d18c80a36d81`。
+- 人工决策：继续使用当前 HTTP Sunny-Ngrok 演示地址，通过能力检测兼容非安全上下文，不要求用户购买 HTTPS 隧道或更换浏览器。
+- 验证：109 项单元/组件测试、针对 CSV 的 2 项 Chromium E2E、lint、typecheck、Prettier 和生产构建通过；公网 `http://devdemo.s7.tunnelfrp.com` 主动禁用 `randomUUID` 后成功绑定 523 B CSV，页面异常为 0。
+- 问题与修正：首次补丁因导入位置假设错误未应用；首次严格类型检查发现 TypedArray 下标类型可能为空，补充非空断言；首次公网验证脚本误导入未直接声明的 `playwright`，改用项目依赖 `@playwright/test` 后通过。
+- 证据：统一 ID 工具及测试、CSV Playwright 回归用例、完整门禁输出、公网隧道实测和项目提交。
+
 ## 结果汇总
 
 - 主要 AI 贡献：需求拆分、架构与共享契约、工程基线、画布和 Worker 集成、转换/Join/文件适配器实现、测试生成、性能测量、安全审查、跨浏览器修复和交付文档。
