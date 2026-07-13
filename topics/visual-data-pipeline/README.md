@@ -22,7 +22,7 @@
 5. [任务看板](05-task-board.md)
 6. [测试与验收](06-testing-and-acceptance.md)
 7. [使用与功能指南](07-user-guide.md)
-8. [演示与使用教学手册](08-tutorial-manual.md)
+8. [演示与使用教学手册](../../README.md)
 9. [架构决策](decisions.md)
 10. [AI 使用记录](ai-usage-log.md)
 
