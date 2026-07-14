@@ -39,7 +39,7 @@
 http://devdemo.s7.tunnelfrp.com
 ```
 
-该地址通过 Sunny-Ngrok 转发到远程机器的 `127.0.0.1:5180`。它是公开 HTTP 地址，不要导入真实敏感数据。
+该地址通过 Sunny-Ngrok 转发到远程机器的 `127.0.0.1:51801`。它是公开 HTTP 地址，不要导入真实敏感数据。
 
 如果公网地址不可用，维护者在远程机器执行：
 
@@ -48,7 +48,7 @@ cd /home/lucas/code/luke/project
 pnpm build
 __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS=<公网域名> \
   pnpm --dir apps/web exec vite preview \
-  --host 0.0.0.0 --port 5180 --strictPort
+  --host 0.0.0.0 --port 51801 --strictPort
 ```
 
 然后使用 Sunny-Ngrok 控制台提供的 Linux 命令启动隧道。隧道 ID 不应写入知识库、截图或公开演示材料。
@@ -398,10 +398,10 @@ west,Casey Chen
 
 分别检查：
 
-1. `127.0.0.1:5180` 是否返回 200。
+1. `127.0.0.1:51801` 是否返回 200。
 2. 生产预览进程是否仍在运行。
 3. Sunny 客户端是否显示“隧道启动成功”并持续发送 Ping。
-4. 控制台隧道本地端口是否为 5180。
+4. 控制台隧道本地端口是否为 51801。
 5. Vite 的 `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS` 是否为实际公网域名。
 
 ### 页面提示 Host 不允许
@@ -411,7 +411,7 @@ west,Casey Chen
 ```bash
 __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS=devdemo.s7.tunnelfrp.com \
   pnpm --dir apps/web exec vite preview \
-  --host 0.0.0.0 --port 5180 --strictPort
+  --host 0.0.0.0 --port 51801 --strictPort
 ```
 
 ### 运行按钮不可用
